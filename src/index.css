@@ -2,95 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Futuristic Chatbot Design System - All colors, gradients, fonts, animations */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Background System */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card and Surface System */
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+    --glass: 240 10% 8%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Interactive Elements */
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Brand Color System */
+    --primary: 258 90% 66%;
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 258 90% 76%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary System */
+    --secondary: 240 5% 15%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted System */
+    --muted: 240 5% 12%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent System */
+    --accent: 258 90% 66%;
+    --accent-foreground: 0 0% 98%;
 
+    /* Status System */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Border and Input System */
+    --border: 240 10% 18%;
+    --input: 240 10% 12%;
+    --ring: 258 90% 66%;
 
-    --radius: 0.5rem;
+    /* Chat-specific Colors */
+    --user-message: 258 90% 66%;
+    --user-message-foreground: 0 0% 98%;
+    --bot-message: 240 5% 15%;
+    --bot-message-foreground: 0 0% 98%;
 
-    --sidebar-background: 0 0% 98%;
+    /* Status Indicators */
+    --online: 142 76% 36%;
+    --typing: 258 90% 66%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Design System Values */
+    --radius: 0.75rem;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-glass: linear-gradient(135deg, hsl(var(--glass)) 0%, hsl(var(--card)) 100%);
+    --gradient-message: linear-gradient(135deg, hsl(var(--user-message)) 0%, hsl(var(--accent)) 100%);
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.2);
+    --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-message: 0 4px 20px hsl(var(--background) / 0.4);
+    --shadow-float: 0 20px 60px -10px hsl(var(--primary) / 0.3);
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+  /* Utility Classes for Chatbot UI */
+  .message-enter {
+    @apply animate-[slideIn_0.4s_ease-out];
+  }
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+  .message-typing {
+    @apply animate-pulse;
+  }
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+  .glass-effect {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: var(--gradient-glass);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
   }
 }
 
@@ -100,6 +103,6 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 }
