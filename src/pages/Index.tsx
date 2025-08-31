@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { ChatBot } from '@/components/ChatBot';
 import { ChatLauncher } from '@/components/ChatLauncher';
+import { BotpressTest } from '@/components/BotpressTest';
 
 const Index = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [showTestPanel, setShowTestPanel] = useState(false);
 
   return (
     <div className="min-h-screen bg-background relative">
@@ -26,11 +28,21 @@ const Index = () => {
               Start Conversation
             </button>
             
-            <button className="px-8 py-4 border border-border text-foreground rounded-full font-semibold transition-all duration-300 hover:bg-muted hover:scale-105">
-              Learn More
+            <button 
+              onClick={() => setShowTestPanel(!showTestPanel)}
+              className="px-8 py-4 border border-border text-foreground rounded-full font-semibold transition-all duration-300 hover:bg-muted hover:scale-105"
+            >
+              {showTestPanel ? 'Hide' : 'Show'} Botpress Test
             </button>
           </div>
         </div>
+
+        {/* Botpress Test Panel */}
+        {showTestPanel && (
+          <div className="mt-8 w-full max-w-4xl">
+            <BotpressTest />
+          </div>
+        )}
 
         {/* Demo Chat Interface - Desktop */}
         <div className="hidden lg:block fixed top-1/2 right-8 transform -translate-y-1/2">

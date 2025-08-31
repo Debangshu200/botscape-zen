@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bot, User } from 'lucide-react';
+import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 
 interface Message {
@@ -8,13 +9,18 @@ interface Message {
   sender: 'user' | 'bot';
   timestamp: Date;
   type?: 'text' | 'card' | 'quick-reply';
+  buttons?: Array<{
+    label: string;
+    payload: string;
+  }>;
 }
 
 interface ChatMessageProps {
   message: Message;
+  onQuickReply?: (payload: string) => void;
 }
 
-export function ChatMessage({ message }: ChatMessageProps) {
+export function ChatMessage({ message, onQuickReply }: ChatMessageProps) {
   const isBot = message.sender === 'bot';
   
   return (
@@ -51,6 +57,23 @@ export function ChatMessage({ message }: ChatMessageProps) {
             {message.content}
           </p>
         </div>
+        
+        {/* Quick Reply Buttons */}
+        {isBot && message.buttons && message.buttons.length > 0 && onQuickReply && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {message.buttons.map((button, index) => (
+              <Button
+                key={index}
+                variant="outline"
+                size="sm"
+                onClick={() => onQuickReply(button.payload)}
+                className="text-xs px-3 py-1 h-auto bg-background hover:bg-accent border-border"
+              >
+                {button.label}
+              </Button>
+            ))}
+          </div>
+        )}
         
         <span className="text-xs text-muted-foreground px-2">
           {message.timestamp.toLocaleTimeString([], { 
